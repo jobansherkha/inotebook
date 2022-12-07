@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router()
 
-router.get('/', (req, res) => {
+const Note = require('../modals/Note');
+
+router.post('/', (req, res) => {
+    
     res.json({
         
     })
