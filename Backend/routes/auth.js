@@ -4,12 +4,14 @@ const router = express.Router();
 // importing bcrypt js, for adding password hashing, salt and pepper
 // npm install bcryptjs
 const bcrypt = require("bcryptjs");
-
 // importing thr express validator by following line
-
 const { body, validationResult } = require("express-validator");
 
-//  create a user using : Post "/api/auth/createuser" doesnot require auth no login required
+//  installing json web token
+var jwt = require("jsonwebtoken");
+
+const JWT_SECRET = "jobanpreetSingh";
+//  Route 1 :  create a user using : Post "/api/auth/createuser" doesnot require auth no login required
 router.post(
   "/createuser",
   [
@@ -47,7 +49,16 @@ router.post(
         password: secPassword,
         email: req.body.email,
       });
-      res.json(user);
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      const authtoken = jwt.sign(data, JWT_SECRET);
+      console.log(jwtData);
+      // res.json(user);
+      res.json(authtoken);
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error occured");
@@ -59,4 +70,48 @@ router.post(
   }
 );
 
+//Route 2  authenticate a user using : Post "/api/auth/login" auth no login required
+
+router.post(
+  "/login",
+  [
+    body("email", "please enter right email").isEmail(),
+    body("password", "password cannot be blanked").exists(),
+  ],
+  async (req, res) => {
+    // if there are errors return bad requests
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+    try {
+      let user = await User.findOne({email});
+      if (!user) {
+        return res.status(400).json({ error: "please try to login 1 with corrrect credentials " });
+      }
+
+      const passwordCompare =  bcrypt.compare( password, user.password);
+      if (!passwordCompare) {
+        return res .status(400).json({ error: "please try to login with corrrect credentials " });
+      }
+
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      const authtoken = jwt.sign(data, JWT_SECRET);
+      console.log(authtoken);
+      // res.json(user);
+      res.json(authtoken);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("some error occured");
+    }
+  }
+);
 module.exports = router;
