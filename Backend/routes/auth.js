@@ -6,11 +6,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 // importing thr express validator by following line
 const { body, validationResult } = require("express-validator");
+var fetchuser = require('../middleware/fetchuser')
 
 //  installing json web token
 var jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "jobanpreetSingh";
+const JWT_SECRET = 'jobanpreetSingh';
 //  Route 1 :  create a user using : Post "/api/auth/createuser" doesnot require auth no login required
 router.post(
   "/createuser",
@@ -107,11 +108,33 @@ router.post(
       const authtoken = jwt.sign(data, JWT_SECRET);
       console.log(authtoken);
       // res.json(user);
-      res.json(authtoken);
+      res.json({authtoken});
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error occured");
     }
   }
 );
+
+// Route 3 :  get user details : Post "/api/auth/getuser" auth , login required
+
+router.post( '/getuser', fetchuser, async (req, res ) => {
+
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select('-password')
+    res.send(user)
+    
+  } catch (error) {
+    console.error(error.message);
+      res.status(500).send("some error occured");
+    
+  }
+
+}
+
+
+
+)
+
 module.exports = router;
