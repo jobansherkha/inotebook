@@ -28,6 +28,8 @@ export default function AddNote() {
             id="title"
             name="title"
             onChange={onChange}
+             minLength ={5}
+             required
           />
         </div>
         <div className="form-group">
@@ -37,7 +39,9 @@ export default function AddNote() {
             className="form-control"
             id="description"
             name="description"
-            onChange={onChange}
+            onChange={onChange} 
+            minLength ={5}
+            required
           />
         </div>
         <div className="form-group">
@@ -48,10 +52,12 @@ export default function AddNote() {
             id="tag"
             name="tag"
             onChange={onChange}
+             minLength ={5}
+             required
           />
         </div>
 
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button disabled = {note.title.length<5 || note.description.length <5 } type="submit" className="btn btn-primary" onClick={handleClick}>
           Submit
         </button>
       </form>
