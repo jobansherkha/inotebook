@@ -1,5 +1,5 @@
 import React from "react";
-import NoteContext from "../NoteContext";
+
 import noteContext from "./noteContext";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhZmNlMTAxMDRjZWE2YmZkOTc1ZTVmIn0sImlhdCI6MTY3MjQ2NjAyMH0.1YI55arDxqlFEb05UxiBEalx5fslnWEM4_f_rMzD0wg",
+          localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -35,7 +35,7 @@ const NoteState = (props) => {
         Accept: "*/*",
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhZmNlMTAxMDRjZWE2YmZkOTc1ZTVmIn0sImlhdCI6MTY3MjQ2NjAyMH0.1YI55arDxqlFEb05UxiBEalx5fslnWEM4_f_rMzD0wg",
+          localStorage.getItem("token"),
       },
 
       body: JSON.stringify({ title, description, tag }),
@@ -55,7 +55,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhZmNlMTAxMDRjZWE2YmZkOTc1ZTVmIn0sImlhdCI6MTY3MjQ2NjAyMH0.1YI55arDxqlFEb05UxiBEalx5fslnWEM4_f_rMzD0wg",
+          localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -77,7 +77,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhZmNlMTAxMDRjZWE2YmZkOTc1ZTVmIn0sImlhdCI6MTY3MjQ2NjAyMH0.1YI55arDxqlFEb05UxiBEalx5fslnWEM4_f_rMzD0wg",
+          localStorage.getItem("token"),
       },
 
       body: JSON.stringify({ title, description, tag }),

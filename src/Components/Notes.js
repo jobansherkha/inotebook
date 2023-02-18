@@ -1,15 +1,23 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import noteContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 
-export default function Notes() {
+export default function Notes(props) {
+  let history = useNavigate();
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem('token')) {
+      getNotes();
+    } else {
+      props.showAlert("danger", "please login to see your notes")
+      history("/login");
+    }
+    
   }, []);
   const [note, setnote] = useState({
     etitle: " ",
@@ -20,14 +28,13 @@ export default function Notes() {
   const onChange = (e) => {
     setnote({ ...note, [e.target.name]: e.target.value });
   };
-  
-  
+
   const ref = useRef(null);
   const refclose = useRef(null);
 
   const updateNote = (currentNote) => {
     ref.current.click();
-    
+
     setnote({
       id: currentNote._id,
       etitle: currentNote.title,
@@ -37,12 +44,10 @@ export default function Notes() {
   };
 
   const handleClick = (e) => {
-    
     e.preventDefault();
     console.log(note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
-    refclose.current.click()
-
+    refclose.current.click();
   };
 
   return (
@@ -93,7 +98,7 @@ export default function Notes() {
                     name="etitle"
                     value={note.etitle}
                     onChange={onChange}
-                    minLength = {5}
+                    minLength={5}
                     required
                   />
                 </div>
@@ -106,7 +111,7 @@ export default function Notes() {
                     name="edescription"
                     value={note.edescription}
                     onChange={onChange}
-                    minLength = {5}
+                    minLength={5}
                     required
                   />
                 </div>
@@ -119,7 +124,7 @@ export default function Notes() {
                     name="etag"
                     value={note.etag}
                     onChange={onChange}
-                    minLength = {5}
+                    minLength={5}
                     required
                   />
                 </div>
@@ -130,9 +135,7 @@ export default function Notes() {
                 type="button"
                 className="btn btn-secondary"
                 data-dismiss="modal"
-                ref = {refclose}
-                
-                
+                ref={refclose}
               >
                 Close
               </button>
@@ -140,7 +143,7 @@ export default function Notes() {
                 type="button"
                 onClick={handleClick}
                 className="btn btn-primary"
-                disabled = {note.etitle.length <5 || note.edescription <5 }
+                disabled={note.etitle.length < 5 || note.edescription < 5}
               >
                 edit note
               </button>
@@ -150,8 +153,9 @@ export default function Notes() {
       </div>
       <div className="conatiner">
         <div className="row">
-        <div className="conatiner">
-          {notes.length === 0 && "No notes to display"}</div>
+          <div className="conatiner">
+            {notes.length === 0 && "No notes to display"}
+          </div>
           {notes.map((note) => {
             return (
               <div className="col-md-3 p-3" key={note._id}>

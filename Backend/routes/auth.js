@@ -57,9 +57,9 @@ router.post(
       };
 
       const authtoken = jwt.sign(data, JWT_SECRET);
-      
+      success = true;
       // res.json(user);
-      res.json(authtoken);
+      res.json({success, authtoken});
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error occured");
@@ -91,13 +91,17 @@ router.post(
     try {
       let user = await User.findOne({email});
       if (!user) {
+        success = false;
         return res.status(400).json({ error: "please try to login 1 with corrrect credentials " });
       }
 
-      const passwordCompare =  bcrypt.compare( password, user.password);
+      const passwordCompare =  await bcrypt.compare( password, user.password);
+      console.log(passwordCompare)
       if (!passwordCompare) {
-        return res .status(400).json({ error: "please try to login with corrrect credentials " });
+        success = false;
+        return res .status(400).json({ success, error: "please try to login with corrrect credentials " });
       }
+      success = true;
 
       const data = {
         user: {
@@ -106,9 +110,10 @@ router.post(
       };
 
       const authtoken = jwt.sign(data, JWT_SECRET);
-      console.log(authtoken);
+      // console.log(authtoken);
       // res.json(user);
-      res.json({authtoken});
+      success = true;
+      res.json({success, authtoken});
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error occured");
@@ -121,7 +126,7 @@ router.post(
 router.post( '/getuser', fetchuser, async (req, res ) => {
 
   try {
-    userId = req.user.id;
+   let  userId = req.user.id;
     const user = await User.findById(userId).select('-password')
     res.send(user)
     
