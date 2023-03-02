@@ -23,7 +23,7 @@ const history = useNavigate()
   return (
     <div>
         
-        <nav className="navbar navbar-expand-lg bg-light">
+        <nav className="navbar navbar-expand-lg bg-warning">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               {" "}
@@ -56,14 +56,12 @@ const history = useNavigate()
                 
                
                 
-              </ul>
-             {!localStorage.getItem('token')? <ul className="nav navbar-nav navbar-right">
-                
-      <li><Link to="/signup"><span className="glyphicon glyphicon-user"></span> Sign Up</Link></li>
-      <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>
-    </ul>:<button type="submit" className="btn btn-primary" onClick={Logout}>
-          Logout
-        </button> }
+              </ul><ul className="nav navbar-nav navbar-right">
+             {!localStorage.getItem('token')? 
+          <ul>      
+     <Link to="/signup" className="btn  btn-outline-light btn-warning ">Sign Up</Link>
+     <Link to="/login" className="btn  btn-outline-light btn-warning">Login</Link></ul>
+    :<Link to="/login" className="btn  btn-outline-light btn-warning" onClick={Logout}>Logout</Link> }</ul>
             </div>
           </div>
         </nav>

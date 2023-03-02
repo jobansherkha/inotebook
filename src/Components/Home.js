@@ -6,7 +6,7 @@ import Notes from "./Notes";
 export default function Home(props) {
  
   return (
-    <div className="my-3">
+    <div className="my-3" style={{backgroundColor : "#FBF9C9"}}>
       
       <Notes showAlert = {props.showAlert}/>
       

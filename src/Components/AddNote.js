@@ -19,9 +19,10 @@ export default function AddNote() {
   };
   return (
     <div>
-      <form className="container">
+      <form className="container rounded" style={{backgroundColor: "#FBF9C9"}}>
         <div className="form-group">
           <label forhtml="title">Title</label>
+          
           <input
             type="text"
             className="form-control"
@@ -34,15 +35,15 @@ export default function AddNote() {
         </div>
         <div className="form-group">
           <label forhtml="description">description</label>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            name="description"
-            onChange={onChange} 
-            minLength ={5}
-            required
-          />
+          <textarea type="text"
+            
+             className="form-control"
+             id="description"
+             name="description"
+             onChange={onChange} 
+             minLength ={5}
+             requiredaria-label=" write note description here"></textarea>
+      
         </div>
         <div className="form-group">
           <label forhtml="tag">tag</label>
@@ -57,7 +58,7 @@ export default function AddNote() {
           />
         </div>
 
-        <button disabled = {note.title.length<5 || note.description.length <5 } type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button  disabled = {note.title.length<5 || note.description.length <5 }className = "btn  btn-outline-warning btn-light btn-block mb-4 mt-4" type="submit"  onClick={handleClick}>
           Submit
         </button>
       </form>

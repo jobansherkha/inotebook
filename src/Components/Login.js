@@ -55,7 +55,8 @@ export default function Login(props) {
   };
 
   return (
-    <div>
+    <div className="container">
+      <h2 className=" text-center mt-3"><mark> Login </mark>here to view your notes </h2><br/>
       <form onSubmit={handleClick}>
         <div className="form-outline mb-4">
           <input
@@ -90,7 +91,7 @@ export default function Login(props) {
         <button
           type="submit"
           
-          className="btn btn-primary btn-block mb-4"
+          className="btn  btn-outline-light btn-warning btn-block mb-4"
         >
           Sign in
         </button>
