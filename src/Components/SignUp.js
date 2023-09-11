@@ -69,7 +69,7 @@ export default function SignUp(props) {
   };
   return (
     <div>
-        {/* <form onSubmit={handleClick}>
+         <form onSubmit={handleClick}>
         <div className="form-outline mb-4">
           <input
             type="text"
@@ -123,7 +123,7 @@ export default function SignUp(props) {
         >
           Sign up
         </button>
-      </form>  */}
+      </form>  
    
       <section className="vh-100">
         <div className="container h-100">
