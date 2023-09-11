@@ -69,61 +69,7 @@ export default function SignUp(props) {
   };
   return (
     <div>
-         <form onSubmit={handleClick}>
-        <div className="form-outline mb-4">
-          <input
-            type="text"
-            id="name"
-            className="form-control"
-            name = "name"
-            value = {signupdata.name}
-            onChange = {onChange}
-            required
-            minLength={3}
-          />
-          <label className="form-label" htmlFor="form2Example1">
-            name
-          </label>
-        </div>
-
-        <div className="form-outline mb-4">
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            name = "email"
-            value = {signupdata.email}
-            onChange = {onChange}
-          />
-          <label className="form-label" htmlFor="form2Example2">
-            email
-          </label>
-        </div>
-        <div className="form-outline mb-4">
-          <input
-           type="password"
-           id="password"
-           className="form-control"
-           name = "password"
-           value = {signupdata.password}
-           onChange = {onChange}
-           minLength={8}
-           required
-          
-          />
-          <label className="form-label" htmlFor="form2Example2">
-            Password
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          
-          className="btn btn-primary btn-block mb-4"
-        >
-          Sign up
-        </button>
-      </form>  
+        
    
       <section className="vh-100">
         <div className="container h-100">
