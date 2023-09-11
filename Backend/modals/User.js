@@ -25,7 +25,7 @@ const UserSchema = new Schema({
     },
   });
 
-  const User = mongoose.model('user', UserSchema);
+  const User = mongoose.model('User', UserSchema);
 
 //   now we are creating index of user model.
 
