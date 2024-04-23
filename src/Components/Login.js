@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Landing } from "./Landing";
+
+
 
 export default function Login(props) {
     let history = useNavigate();
@@ -33,7 +36,7 @@ export default function Login(props) {
     console.log(json);
     if ( json.success){
        props.showAlert("success", "your are successfully logged in ")
-        localStorage.setItem("token", json.authtoken)
+        localStorage.setItem("token", json.token)
         
         history("/")
 
@@ -55,7 +58,10 @@ export default function Login(props) {
   };
 
   return (
+    <>
+    <Landing/>
     <div className="container">
+    
       <h2 className=" text-center mt-3"><mark> Login </mark>here to view your notes </h2><br/>
       <form onSubmit={handleClick}>
         <div className="form-outline mb-4">
@@ -96,6 +102,6 @@ export default function Login(props) {
           Sign in
         </button>
       </form>
-    </div>
+    </div></>
   );
 }

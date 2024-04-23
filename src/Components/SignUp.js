@@ -39,7 +39,7 @@ export default function SignUp(props) {
     console.log(json);
    
     if(json.success){
-      history("/login")
+      history("/user/login")
       props.showAlert("success", "sign up successfull, now please login to continue ")
       console.log(props.alert)
     }

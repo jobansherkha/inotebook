@@ -61,6 +61,7 @@ const history = useNavigate()
           <ul>      
      <Link to="/signup" className="btn  btn-outline-light btn-warning ">Sign Up</Link>
      <Link to="/login" className="btn  btn-outline-light btn-warning">Login</Link></ul>
+     
     :<Link to="/login" className="btn  btn-outline-light btn-warning" onClick={Logout}>Logout</Link> }</ul>
             </div>
           </div>
